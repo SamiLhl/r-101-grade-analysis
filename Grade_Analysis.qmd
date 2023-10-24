@@ -26,3 +26,10 @@ table2 <- knitr::kable(Q2)
 ```
 This table offers descriptive of the variable Exam
 `r table2`
+
+### Q3 
+```{r}
+NoFinal <- grade |> filter(is.na(Exam)==TRUE)
+NoFinalnb <- count(NoFinal)
+```
+A total of `r NoFinalnb` students did not take the final exam
