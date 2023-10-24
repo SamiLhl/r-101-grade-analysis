@@ -43,4 +43,12 @@ ggplot(GradeB, aes(x = Exam))+
 
 ```
 
+### Q5 
+```{r}
+grouped_grade <- grade|> group_by(Group)
+ countpergroup <- count(grouped_grade)
+ table5<- knitr::kable(countpergroup)
+```
+This table shows how many people can be found in each groups (here called grp)
+`r table5`
 
