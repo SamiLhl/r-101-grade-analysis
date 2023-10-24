@@ -2,6 +2,7 @@
 title: "Grade_Analysis_SL"
 author: "Sami Louahlia"
 format: html
+code-fold: true
 ---
 ```{r}
 #|message: false
@@ -32,4 +33,14 @@ This table offers descriptive of the variable Exam
 NoFinal <- grade |> filter(is.na(Exam)==TRUE)
 NoFinalnb <- count(NoFinal)
 ```
-A total of `r NoFinalnb` students did not take the final exam
+A total of `r NoFinalnb` students did not take the final exam.
+
+### Q4 
+```{r}
+GradeB <- grade |> filter(!is.na(Exam))
+ggplot(GradeB, aes(x = Exam))+
+  geom_bar()
+
+```
+
+
