@@ -13,8 +13,16 @@ library(tidyr)
 library(ggplot2)
 ```
 
-## Data
+### Q1 Data
 ```{r}
 #|message: false
 grade <- vroom(here("grades.csv"))
 ```
+### Q2 
+```{r}
+Q2 <- grade |> summarize("minimum" = min(Exam, na.rm=TRUE), "maxixmum" = max(Exam, na.rm=TRUE), "median" = median(Exam, na.rm=TRUE), "mean" = mean(Exam, na.rm=TRUE))
+
+table2 <- knitr::kable(Q2)
+```
+This table offers descriptive of the variable Exam
+`r table2`
