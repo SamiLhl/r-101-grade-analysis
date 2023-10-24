@@ -59,4 +59,8 @@ ggplot(grade, aes(x=Group))+
 ```
 Here is a graphical representation of the group's number of members.
 
-
+### Q7
+```{r}
+ggplot(grade, aes(x=Exam, color=Exam))+
+  geom_bar()
+```
