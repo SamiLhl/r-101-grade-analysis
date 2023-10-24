@@ -52,3 +52,11 @@ grouped_grade <- grade|> group_by(Group)
 This table shows how many people can be found in each groups (here called grp)
 `r table5`
 
+### Q6
+```{r}
+ggplot(grade, aes(x=Group))+
+  geom_bar()
+```
+Here is a graphical representation of the group's number of members.
+
+
