@@ -162,10 +162,21 @@ Q16 <- Q15 |> group_by(Id) |>
 ### Q17 
 ```{r}
 Q17 <- Q15 |> group_by(Group) |>
-  mutate(P_missed = sum(QSkip > 0)/n()) |>
-  summarise(P_missed)
+  summarise(P_missed = sum(QSkip > 0)/n())
 print(Q17)
 ```
 This table represents the percentage of students in each groups that skipped or missed at least one of the online MCQs.
 
+### Q18
+
+```{r}
+Part1 <- Q15 |> group_by(Group) |>
+  summarise(avg_Grade = sum(Exam, na.rm=TRUE)/n())
+```
+```{r}
+Part2 <- inner_join(Q17,Part1,by = "Group")
+ggplot(Part2,aes(x=P_missed, y=avg_Grade))+
+  geom_point()
+```
+This is a graphical representation of the groups' average grades as a function of the percentage of students of these groups missing at least one online MCQ. There seem to be a negative correlation between the groups' average grades and the percentage of students missing at least one MCQ in these same groups. However, we notice a sizeable outlier, which could make any regression attempt statistically insignificant as there are not so many groups.
 
