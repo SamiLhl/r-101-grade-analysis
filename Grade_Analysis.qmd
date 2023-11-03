@@ -82,5 +82,13 @@ table8<- knitr::kable(Q8)
 The number of students missing the final exam per group is as shown in this table.
 `r table8`
 
+### Q9
+```{r}
+Q8 |> group_by(Group)
+ggplot(Q8,aes(x= Group, y = Missed_Fin)) +
+         geom_col()+
+xlab("Groups")+
+ylab("Nb of skippers")
+```
 
 
