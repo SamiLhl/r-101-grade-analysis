@@ -136,5 +136,26 @@ table14 <- knitr:: kable(Q14)
 
 ### Q15
 
+```{r}
+Q15 <- grade |> rowwise() |> mutate(QSkip=sum(is.na((c_across(starts_with("Online"))))))
+ggplot(Q15, aes(x=QSkip, y=Exam))+
+  geom_jitter(alpha=0.4, width = 0.1, height= 0.1)
+```
 
+This is a graphical representation of the grade of the exam for each students, conditioned on the number of online MCQ skipped. It appears there is some form of negative correlation. The more one skips the MCQs the lower the Exam grade.
+
+```{r}
+
+ggplot(Q15, aes(x=as.factor(QSkip), y=Exam))+
+  geom_boxplot()
+```
+Another way to put it. We can see most of the grades are indeed decreasing as students skip more MCQs.
+
+### Q16
+
+```{r}
+Q16 <- Q15 |> group_by(Id) |>
+  summarise(QSkip>0)|>
+  print(Q16)
+```
 
