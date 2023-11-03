@@ -101,3 +101,13 @@ names_to="Exam_form",
 values_to ="Grade")
 ```
 
+### Q11
+
+```{r}
+Q11 <- New_Grade |> group_by(Id) |>
+  summarise(Q11 = sum(is.na(Grade)))
+print(Q11)
+
+```
+
+
