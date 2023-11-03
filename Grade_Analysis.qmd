@@ -23,6 +23,8 @@ library(stringr)
 #|message: false
 grade <- vroom(here("grades.csv"))
 ```
+Loading the Data...
+
 ### Q2 
 ```{r}
 Q2 <- grade |> summarize("minimum" = min(Exam, na.rm=TRUE), "maxixmum" = max(Exam, na.rm=TRUE), "median" = median(Exam, na.rm=TRUE), "mean" = mean(Exam, na.rm=TRUE))
@@ -103,6 +105,7 @@ New_Grade <- grade |> pivot_longer(cols = -c(Id, Group),
 names_to="Exam_form",
 values_to ="Grade")
 ```
+Perform a pivot longer command on all variables excespt on Id and Group.
 
 ### Q11
 
@@ -111,6 +114,7 @@ Q11 <- New_Grade |> group_by(Id) |>
   summarise(Nb_skip = sum(is.na(Grade)))
 
 ```
+The resulting table is too long to be presented. It shows how many tests each student have missed. It is quite rare for a student not to miss any test.
 
 ### Q12
 
@@ -136,6 +140,7 @@ table13 <- knitr:: kable(Q13)
 Q14 <- New_Grade |> filter(str_starts(Exam_form, "Online")) |> group_by(Id) |>  summarise(Missed_OMCQ = sum(is.na(Grade)))
 table14 <- knitr:: kable(Q14)
 ```
+Too big of a table to be shown here. For each student, we here count how many online MCQ they have missed.
 
 ### Q15
 
@@ -159,16 +164,17 @@ Another way to put it. We can see most of the grades are indeed decreasing as st
 ```{r}
 Q16 <- Q15 |> group_by(Id) |>
   summarise(QSkip>0)
-  print(Q16)
 ```
+The resulting table is too long to be presented. It shows whether students have missed at least one online MCQ (TRUE) or did not miss any (FALSE). It seems students generally miss at least one online MCQ. 
 
 ### Q17 
 ```{r}
 Q17 <- Q15 |> group_by(Group) |>
   summarise(P_missed = sum(QSkip > 0)/n())
-print(Q17)
+table17 <- knitr:: kable(Q17)
 ```
 This table represents the percentage of students in each groups that skipped or missed at least one of the online MCQs.
+`r table17``
 
 ### Q18
 

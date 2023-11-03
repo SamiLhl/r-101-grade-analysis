@@ -123,6 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>grade <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="fu">here</span>(<span class="st">"grades.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Loading the Data…</p>
 </section>
 <section id="q2" class="level3">
 <h3 class="anchored" data-anchor-id="q2">Q2</h3>
@@ -481,6 +482,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">values_to =</span><span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Perform a pivot longer command on all variables excespt on Id and Group.</p>
 </section>
 <section id="q11" class="level3">
 <h3 class="anchored" data-anchor-id="q11">Q11</h3>
@@ -491,6 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Nb_skip =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Grade)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>The resulting table is too long to be presented. It shows how many tests each student have missed. It is quite rare for a student not to miss any test.</p>
 </section>
 <section id="q12" class="level3">
 <h3 class="anchored" data-anchor-id="q12">Q12</h3>
@@ -632,6 +635,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>table14 <span class="ot">&lt;-</span> knitr<span class="sc">::</span> <span class="fu">kable</span>(Q14)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Too big of a table to be shown here. For each student, we here count how many online MCQ they have missed.</p>
 </section>
 <section id="q15" class="level3">
 <h3 class="anchored" data-anchor-id="q15">Q15</h3>
@@ -665,70 +669,145 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Q16 <span class="ot">&lt;-</span> Q15 <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Id) <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(QSkip<span class="sc">&gt;</span><span class="dv">0</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(Q16)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(QSkip<span class="sc">&gt;</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 729 × 2
-      Id `QSkip &gt; 0`
-   &lt;dbl&gt; &lt;lgl&gt;      
- 1     1 TRUE       
- 2     2 TRUE       
- 3     3 TRUE       
- 4     4 FALSE      
- 5     5 TRUE       
- 6     6 TRUE       
- 7     7 TRUE       
- 8     8 TRUE       
- 9     9 TRUE       
-10    10 TRUE       
-# ℹ 719 more rows</code></pre>
 </div>
-</div>
+<p>The resulting table is too long to be presented. It shows whether students have missed at least one online MCQ (TRUE) or did not miss any (FALSE). It seems students generally miss at least one online MCQ.</p>
 </section>
 <section id="q17" class="level3">
 <h3 class="anchored" data-anchor-id="q17">Q17</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Q17 <span class="ot">&lt;-</span> Q15 <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Group) <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">P_missed =</span> <span class="fu">sum</span>(QSkip <span class="sc">&gt;</span> <span class="dv">0</span>)<span class="sc">/</span><span class="fu">n</span>())</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Q17)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Q17 <span class="ot">&lt;-</span> Q15 <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Group) <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">P_missed =</span> <span class="fu">sum</span>(QSkip <span class="sc">&gt;</span> <span class="dv">0</span>)<span class="sc">/</span><span class="fu">n</span>())</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>table17 <span class="ot">&lt;-</span> knitr<span class="sc">::</span> <span class="fu">kable</span>(Q17)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 24 × 2
-   Group  P_missed
-   &lt;chr&gt;     &lt;dbl&gt;
- 1 grp_1     1    
- 2 grp_10    0.957
- 3 grp_11    0.92 
- 4 grp_12    1    
- 5 grp_13    0.966
- 6 grp_14    0.969
- 7 grp_15    0.941
- 8 grp_16    0.909
- 9 grp_17    0.943
-10 grp_18    1    
-# ℹ 14 more rows</code></pre>
-</div>
 </div>
 <p>This table represents the percentage of students in each groups that skipped or missed at least one of the online MCQs.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Group</th>
+<th style="text-align: right;">P_missed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">grp_1</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_10</td>
+<td style="text-align: right;">0.9565217</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_11</td>
+<td style="text-align: right;">0.9200000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_12</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_13</td>
+<td style="text-align: right;">0.9655172</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_14</td>
+<td style="text-align: right;">0.9687500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_15</td>
+<td style="text-align: right;">0.9411765</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_16</td>
+<td style="text-align: right;">0.9090909</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_17</td>
+<td style="text-align: right;">0.9428571</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_18</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_19</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_2</td>
+<td style="text-align: right;">0.9565217</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_20</td>
+<td style="text-align: right;">0.8181818</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_21</td>
+<td style="text-align: right;">0.8888889</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_22</td>
+<td style="text-align: right;">0.9629630</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_23</td>
+<td style="text-align: right;">0.9393939</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_24</td>
+<td style="text-align: right;">0.8000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_3</td>
+<td style="text-align: right;">0.7812500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_4</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_5</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_6</td>
+<td style="text-align: right;">0.9565217</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_7</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grp_8</td>
+<td style="text-align: right;">0.9000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grp_9</td>
+<td style="text-align: right;">0.9310345</td>
+</tr>
+</tbody>
+</table>
+<p>`</p>
 </section>
 <section id="q18" class="level3">
 <h3 class="anchored" data-anchor-id="q18">Q18</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Part1 <span class="ot">&lt;-</span> Q15 <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Group) <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_Grade =</span> <span class="fu">sum</span>(Exam, <span class="at">na.rm=</span><span class="cn">TRUE</span>)<span class="sc">/</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Part1 <span class="ot">&lt;-</span> Q15 <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Group) <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_Grade =</span> <span class="fu">sum</span>(Exam, <span class="at">na.rm=</span><span class="cn">TRUE</span>)<span class="sc">/</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Part2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(Q17,Part1,<span class="at">by =</span> <span class="st">"Group"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Part2,<span class="fu">aes</span>(<span class="at">x=</span>P_missed, <span class="at">y=</span>avg_Grade))<span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Part2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(Q17,Part1,<span class="at">by =</span> <span class="st">"Group"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Part2,<span class="fu">aes</span>(<span class="at">x=</span>P_missed, <span class="at">y=</span>avg_Grade))<span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="Grade_Analysis_files/figure-html/Q18-1.png" class="img-fluid" width="672"></p>
