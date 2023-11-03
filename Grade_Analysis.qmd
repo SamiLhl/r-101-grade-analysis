@@ -12,6 +12,7 @@ library(vroom)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(stringr)
 ```
 
 ### Q1 Data
@@ -84,7 +85,6 @@ The number of students missing the final exam per group is as shown in this tabl
 
 ### Q9
 ```{r}
-Q8 |> group_by(Group)
 ggplot(Q8,aes(x= Group, y = Missed_Fin)) +
          geom_col()+
 xlab("Groups")+
@@ -106,10 +106,9 @@ values_to ="Grade")
 ```{r}
 Q11 <- New_Grade |> group_by(Id) |>
   summarise(Nb_skip = sum(is.na(Grade)))
-print(Q11)
 
 ```
-
+`r table11`
 ### Q12
 
 ```{r}
@@ -119,4 +118,12 @@ ggplot(Q11, aes(x=Nb_skip)) +
 
 This is the distribution of the number of missing grades per students. 
 
+### Q13
+Here we try to do get the same info as in Q8, namely the number of students, per group, who missed the Exam
+
+```{r}
+Q13 <- New_Grade |> filter(Exam_form=="Exam") |> group_by(Group) |>  summarise(Missed_tests = sum(is.na(Grade)))
+table13 <- knitr:: kable(Q13)
+```
+`r table13`
 
