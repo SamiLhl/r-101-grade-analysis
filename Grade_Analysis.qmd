@@ -91,4 +91,13 @@ xlab("Groups")+
 ylab("Nb of skippers")
 ```
 
+This is a graphical representation of the previous question. 
+
+### Q10 
+
+```{r}
+New_Grade <- grade |> pivot_longer(cols = -c(Id, Group),
+names_to="Exam_form",
+values_to ="Grade")
+```
 
