@@ -108,7 +108,7 @@ Q11 <- New_Grade |> group_by(Id) |>
   summarise(Nb_skip = sum(is.na(Grade)))
 
 ```
-`r table11`
+
 ### Q12
 
 ```{r}
@@ -126,4 +126,12 @@ Q13 <- New_Grade |> filter(Exam_form=="Exam") |> group_by(Group) |>  summarise(M
 table13 <- knitr:: kable(Q13)
 ```
 `r table13`
+
+### Q14
+
+```{r}
+Q14 <- New_Grade |> filter(str_starts(Exam_form, "Online")) |> group_by(Id) |>  summarise(Missed_OMCQ = sum(is.na(Grade)))
+table14 <- knitr:: kable(Q14)
+```
+
 
