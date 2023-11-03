@@ -134,4 +134,7 @@ Q14 <- New_Grade |> filter(str_starts(Exam_form, "Online")) |> group_by(Id) |>  
 table14 <- knitr:: kable(Q14)
 ```
 
+### Q15
+
+
 
