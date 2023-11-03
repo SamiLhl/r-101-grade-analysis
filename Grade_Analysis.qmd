@@ -159,3 +159,13 @@ Q16 <- Q15 |> group_by(Id) |>
   print(Q16)
 ```
 
+### Q17 
+```{r}
+Q17 <- Q15 |> group_by(Group) |>
+  mutate(P_missed = sum(QSkip > 0)/n()) |>
+  summarise(P_missed)
+print(Q17)
+```
+This table represents the percentage of students in each groups that skipped or missed at least one of the online MCQs.
+
+
