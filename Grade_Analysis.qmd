@@ -105,9 +105,18 @@ values_to ="Grade")
 
 ```{r}
 Q11 <- New_Grade |> group_by(Id) |>
-  summarise(Q11 = sum(is.na(Grade)))
+  summarise(Nb_skip = sum(is.na(Grade)))
 print(Q11)
 
 ```
+
+### Q12
+
+```{r}
+ggplot(Q11, aes(x=Nb_skip)) +
+         geom_bar()
+```
+
+This is the distribution of the number of missing grades per students. 
 
 
