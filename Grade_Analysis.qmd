@@ -61,6 +61,26 @@ Here is a graphical representation of the group's number of members.
 
 ### Q7
 ```{r}
-ggplot(grade, aes(x=Exam, color=Exam))+
+ggplot(GradeB, aes(x=Exam, fill=Group))+
   geom_bar()
 ```
+This is visually pleasing. However, it seems rather uninformative :(
+```{r}
+ggplot(GradeB, aes(x=Exam, fill=Group))+
+  geom_bar(position="fill")
+```
+This makes the group comparable in relative terms. We however lose the absolute grade distribution in the process.
+
+### Q8
+```{r}
+Q8 <- grade |> group_by(Group) |>
+  summarise(Missed_Fin = sum(is.na(Exam)))
+
+table8<- knitr::kable(Q8)
+```
+
+The number of students missing the final exam per group is as shown in this table.
+`r table8`
+
+
+
