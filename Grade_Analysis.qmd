@@ -2,6 +2,9 @@
 title: "Grade_Analysis_SL"
 author: "Sami Louahlia"
 format: html
+execute: 
+  message: false
+  warning: false
 code-fold: true
 ---
 ```{r}
@@ -37,7 +40,7 @@ NoFinalnb <- count(NoFinal)
 A total of `r NoFinalnb` students did not take the final exam.
 
 ### Q4 
-```{r}
+```{r Q4}
 GradeB <- grade |> filter(!is.na(Exam))
 ggplot(GradeB, aes(x = Exam))+
   geom_bar()
@@ -54,19 +57,19 @@ This table shows how many people can be found in each groups (here called grp)
 `r table5`
 
 ### Q6
-```{r}
+```{r Q6}
 ggplot(grade, aes(x=Group))+
   geom_bar()
 ```
 Here is a graphical representation of the group's number of members.
 
 ### Q7
-```{r}
+```{r Q7A}
 ggplot(GradeB, aes(x=Exam, fill=Group))+
   geom_bar()
 ```
 This is visually pleasing. However, it seems rather uninformative :(
-```{r}
+```{r Q7B}
 ggplot(GradeB, aes(x=Exam, fill=Group))+
   geom_bar(position="fill")
 ```
@@ -84,7 +87,7 @@ The number of students missing the final exam per group is as shown in this tabl
 `r table8`
 
 ### Q9
-```{r}
+```{r Q9}
 ggplot(Q8,aes(x= Group, y = Missed_Fin)) +
          geom_col()+
 xlab("Groups")+
@@ -111,7 +114,7 @@ Q11 <- New_Grade |> group_by(Id) |>
 
 ### Q12
 
-```{r}
+```{r Q12}
 ggplot(Q11, aes(x=Nb_skip)) +
          geom_bar()
 ```
@@ -136,7 +139,7 @@ table14 <- knitr:: kable(Q14)
 
 ### Q15
 
-```{r}
+```{r Q15A}
 Q15 <- grade |> rowwise() |> mutate(QSkip=sum(is.na((c_across(starts_with("Online"))))))
 ggplot(Q15, aes(x=QSkip, y=Exam))+
   geom_jitter(alpha=0.4, width = 0.1, height= 0.1)
@@ -144,7 +147,7 @@ ggplot(Q15, aes(x=QSkip, y=Exam))+
 
 This is a graphical representation of the grade of the exam for each students, conditioned on the number of online MCQ skipped. It appears there is some form of negative correlation. The more one skips the MCQs the lower the Exam grade.
 
-```{r}
+```{r Q15B}
 
 ggplot(Q15, aes(x=as.factor(QSkip), y=Exam))+
   geom_boxplot()
@@ -155,7 +158,7 @@ Another way to put it. We can see most of the grades are indeed decreasing as st
 
 ```{r}
 Q16 <- Q15 |> group_by(Id) |>
-  summarise(QSkip>0)|>
+  summarise(QSkip>0)
   print(Q16)
 ```
 
@@ -173,7 +176,7 @@ This table represents the percentage of students in each groups that skipped or 
 Part1 <- Q15 |> group_by(Group) |>
   summarise(avg_Grade = sum(Exam, na.rm=TRUE)/n())
 ```
-```{r}
+```{r Q18}
 Part2 <- inner_join(Q17,Part1,by = "Group")
 ggplot(Part2,aes(x=P_missed, y=avg_Grade))+
   geom_point()
