@@ -61,7 +61,8 @@ This table shows how many people can be found in each groups (here called grp)
 ### Q6
 ```{r Q6}
 ggplot(grade, aes(x=Group))+
-  geom_bar()
+  geom_bar()+
+  theme(axis.text.x = element_text(angle = 42, hjust = 1))
 ```
 Here is a graphical representation of the group's number of members.
 
@@ -93,7 +94,8 @@ The number of students missing the final exam per group is as shown in this tabl
 ggplot(Q8,aes(x= Group, y = Missed_Fin)) +
          geom_col()+
 xlab("Groups")+
-ylab("Nb of skippers")
+ylab("Nb of skippers")+
+  theme(axis.text.x = element_text(angle = 42, hjust = 1))
 ```
 
 This is a graphical representation of the previous question. 
